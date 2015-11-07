@@ -47,5 +47,7 @@ namespace BookStoreServiceApi.Models
         /// Tags for this Ad.
         /// </summary>
         IList<string> Tags { get; set; }
+
+        IList<System.Drawing.Image> Pictures { get; set; }
     }
 }
