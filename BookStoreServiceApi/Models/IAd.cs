@@ -41,7 +41,7 @@ namespace BookStoreServiceApi.Models
         /// <summary>
         /// Date and time that Ad has been posted on.
         /// </summary>
-        DateTime PostTimestamp { get; set; }
+        DateTime PostTimestamp { get; }
 
         /// <summary>
         /// Tags for this Ad.
