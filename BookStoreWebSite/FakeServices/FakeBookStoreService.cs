@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using BookStoreServiceApi;
 using BookStoreServiceApi.Models;
+using System.Web.UI.WebControls;
+using System.IO;
 
 namespace BookStoreWebSite.FakeServices
 {
@@ -65,13 +67,23 @@ namespace BookStoreWebSite.FakeServices
                         IsHardCover = true,
                         NumberOfPages = ((i + 1) % 3 + 1) * 100
                     },
-                    Price = ((i + 1) % 5 + 1) * 10
+                    Price = ((i + 1) % 5 + 1) * 10,
+                    Pictures = new List<byte[]>()
                 };
 
+                //var image = System.Drawing.Image.FromFile(@"C:\SchoolProject\BookStore\BookStoreWebSite\Resources\No-Book.jpg");
+                //ad.Pictures.Add(ImageToBytes(image));
                 adList.Add(ad);
             }
 
             return adList;
+        }
+
+        public byte[] ImageToBytes(System.Drawing.Image img)
+        {
+            var converter = new System.Drawing.ImageConverter();
+
+            return (byte[])converter.ConvertTo(img, typeof(byte[]));
         }
     }
 }

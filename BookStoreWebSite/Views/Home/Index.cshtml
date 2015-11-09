@@ -4,27 +4,32 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="container-fluid">
-    @foreach (var ad in Model)
-    {
-        <div class="row">
-            <div class="col-md-12 margin-top-40" style="background:#f2f2f2;border:1px solid #808080;box-shadow:0px 2px 5px #ccc">
-                <div class="col-md-4">
-                    <p>Picture</p>
-                </div>
+@foreach (var ad in Model)
+{
+    <div class="row">
+        <div class="col-md-12 margin-top-20" style="background:#f2f2f2;box-shadow:0px 2px 5px #ccc;padding: 10px 10px 10px 10px">
+            <div class="col-md-4">
+                @{
+                    string imgSrc = @"/Resources/No-Book.jpg";
+                    if (ad.Pictures.Count != 0)
+                    {
+                        var base64 = Convert.ToBase64String(ad.Pictures[0]);
+                        imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                    }
+                }
+                <img class="img-responsive img-rounded" style="margin:10px 10px 10px 10px;max-width:200px" src="@imgSrc" />
+            </div>
+            <div class="col-md-8">
                 <div class="col-md-8">
-                    <div class="col-md-8">
-                        <h3>@ad.Title</h3>
-                        <p>Book: @ad.Book.Title</p>
-
-                        <p>Posted By: @ad.UserPosted</p>
-                    </div>
-                    <div class="col-md-4">
-                        <h4>Price: @ad.Price</h4>
-                    </div>
+                    <h3>@ad.Title</h3>
+                    <p>Book: @ad.Book.Title</p>
+                    <p>Posted By: @ad.UserPosted</p>
+                </div>
+                <div class="col-md-4">
+                    <h4 class="text-right margin-top-25">Price: @ad.Price</h4>
                 </div>
             </div>
-
         </div>
-    }
-</div>
+
+    </div>
+}

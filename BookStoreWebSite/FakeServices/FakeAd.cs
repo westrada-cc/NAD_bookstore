@@ -102,6 +102,6 @@ namespace BookStoreWebSite.FakeServices
 
         public IList<string> Tags { get; set; }
 
-        public IList<Image> Pictures { get; set; }
+        public IList<byte[]> Pictures { get; set; }
     }
 }

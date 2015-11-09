@@ -48,6 +48,6 @@ namespace BookStoreServiceApi.Models
         /// </summary>
         IList<string> Tags { get; set; }
 
-        IList<System.Drawing.Image> Pictures { get; set; }
+        IList<byte[]> Pictures { get; set; }
     }
 }
