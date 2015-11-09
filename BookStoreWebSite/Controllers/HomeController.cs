@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookStoreServiceApi;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,27 @@ namespace BookStoreWebSite.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IBookStoreService _service;
+
+        public HomeController(IBookStoreService service)
+        {
+            _service = service;
+        }
+
         public ActionResult Index()
         {
-            return View();
+            string searchString = null;
+
+            if (this.Request.QueryString.HasKeys())
+            {
+                if (this.Request.QueryString.Keys[0] == "Search")
+                {
+                    searchString = this.Request.QueryString.GetValues(0)[0];
+                }
+            }
+            var fetchedAds = _service.GetAds(searchString, null, null);
+
+            return View(fetchedAds);
         }
 
         public ActionResult About()

@@ -79,6 +79,16 @@ namespace BookStoreWebSite.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string Nickname { get; set; }
+
+        public string Address { get; set; }
+
+        public string PhoneNumber { get; set; }
     }
 
     public class ResetPasswordViewModel

@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BookStoreWebSite.Models;
+using BookStoreServiceApi;
 
 namespace BookStoreWebSite.Controllers
 {
@@ -17,9 +18,11 @@ namespace BookStoreWebSite.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IBookStoreService _service;
 
-        public AccountController()
+        public AccountController(IBookStoreService service)
         {
+            _service = service;
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -155,6 +158,9 @@ namespace BookStoreWebSite.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    // If successful registered, we register this user to our db as well.
+                    // TODO: Register a user.
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

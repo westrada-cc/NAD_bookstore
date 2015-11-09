@@ -40,7 +40,7 @@ namespace BookStoreServiceApi
         /// </summary>
         /// <param name="isbn">ISBN to search books by.</param>
         /// <returns>List of Books.</returns>
-        IList<IBook> GetBooks(string isbn); 
+        IList<IBook> GetBooksByIsbn(string isbn); 
 
         /// <summary>
         /// Posts an Ad. 
@@ -61,7 +61,7 @@ namespace BookStoreServiceApi
         /// <param name="from">Minimum Ad PostTimestamp. If NUll argument is ignored.</param>
         /// <param name="to">Maximum Ad PostTimestamp. If NUll argument is ignored.</param>
         /// <returns></returns>
-        IList<IAd> GetAds(string search, DateTime from, DateTime to);
+        IList<IAd> GetAds(string search, DateTime? from, DateTime? to);
 
         #endregion
     }
