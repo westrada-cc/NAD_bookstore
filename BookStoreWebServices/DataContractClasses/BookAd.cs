@@ -7,7 +7,7 @@ using System.Runtime.Serialization; //[DataContract], [DataMember]
 namespace BookStoreWebServices
 {
     [DataContract]
-    class BookAd
+    public class BookAd
     {
         /// <summary>
         /// Unique ID of an Ad in DB.

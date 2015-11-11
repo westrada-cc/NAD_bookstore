@@ -17,15 +17,15 @@ namespace BookStoreWebServices
         List<BookAd> bookAds = new List<BookAd>(); //List of all available ads
         List<Book> books = new List<Book>(); //List of all available ads
         int bookAdCount = 0;    //Count of available ads
-        int bookCount = 0;
+        int bookCount = 0;  //Count of available books
 
         /// <summary>
-        /// Gets a list of Books that match the search argument.
+        /// Gets a list of all Books.
         /// </summary>
-        /// <param name="search">String to search for books by.</param>
+        /// <param name="void">It takes no parameters.</param>
         /// <returns>List of Books.</returns>
         /// 
-        IList<Book> GetBooks()
+        public List<Book> GetBooks()
         {
             return books.ToList();
         }
@@ -36,7 +36,7 @@ namespace BookStoreWebServices
         /// <param name="isbn">ISBN to search books by.</param>
         /// <returns>List of Books.</returns>
         /// 
-        IList<Book> GetBooksByIsbn(string isbn)
+        public List<Book> GetBooksByIsbn(string isbn)
         {
             return books.FindAll(e => e.Isbn.Equals(isbn));
         }
@@ -47,20 +47,18 @@ namespace BookStoreWebServices
         /// <param name="title">Title to search books by.</param>
         /// <returns>List of Books.</returns>
         /// 
-        IList<Book> GetBooksByTitle(string title)
+        public List<Book> GetBooksByTitle(string title)
         {
             return books.FindAll(e => e.Title.Equals(title));
         }
 
         /// <summary>
-        /// Gets Ads based on arguments search,from, and to. 
+        /// Gets Ads based on argument title. 
         /// </summary>
-        /// <param name="search">String to search for ads by. If NULL, argument is ignored.</param>
-        /// <param name="from">Minimum Ad PostTimestamp. If NUll argument is ignored.</param>
-        /// <param name="to">Maximum Ad PostTimestamp. If NUll argument is ignored.</param>
-        /// <returns></returns>
+        /// <param name="title">Title to search for ads by.</param>
+        /// <returns>List of Book ads.</returns>
         /// 
-        IList<BookAd> GetAds(string title)
+        public List<BookAd> GetAds(string title)
         {
             return bookAds.FindAll(e => e.Title.Equals(title));
         }
@@ -72,11 +70,9 @@ namespace BookStoreWebServices
         /// To successfully post an Ad, ad argument must contain a valid User that posted the ad, and userPassword argument must match that User's password in DB.
         /// </remarks>
         /// <param name="ad">Ad to post.</param>
-        /// <exception cref="ArgumentNullException">Thrown when ad argument is NULL.</exception>
-        /// <exception cref="ArgumentException">Thrown when ad argument is not valid, userPassword argument is not valid</exception>
-        /// <returns>True if Ad was posted.</returns>
+        /// <returns>The Book ad that was posted.</returns>
         /// 
-        BookAd PostAd(BookAd ad)
+        public BookAd PostAd(BookAd ad)
         {
             ad.Id = ++bookAdCount;
             bookAds.Add(ad);
@@ -89,12 +85,10 @@ namespace BookStoreWebServices
         /// <remarks>
         /// To successfully post an book, ad argument must contain a valid User that posted the ad, and userPassword argument must match that User's password in DB.
         /// </remarks>
-        /// <param name="ad">Ad to post.</param>
-        /// <exception cref="ArgumentNullException">Thrown when ad argument is NULL.</exception>
-        /// <exception cref="ArgumentException">Thrown when ad argument is not valid, userPassword argument is not valid</exception>
-        /// <returns>True if Ad was posted.</returns>
+        /// <param name="ad">Book to post.</param>
+        /// <returns>The Book that was posted.</returns>
         /// 
-        Book PostBook(Book book)
+        public Book PostBook(Book book)
         {
             book.Id = ++bookCount;
             books.Add(book);

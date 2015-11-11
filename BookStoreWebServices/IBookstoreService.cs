@@ -11,14 +11,14 @@ namespace BookStoreWebServices
     public interface IBookstoreService
     {
         /// <summary>
-        /// Gets a list of Books that match the search argument.
+        /// Gets a list of all Books.
         /// </summary>
-        /// <param name="search">String to search for books by.</param>
+        /// <param name="void">It takes no parameters.</param>
         /// <returns>List of Books.</returns>
         /// 
         [OperationContract]
         [WebGet(UriTemplate = "")]
-        IList<Book> GetBooks();
+        List<Book> GetBooks();
 
         /// <summary>
         /// Gets a list of Books that match the search argument.
@@ -27,8 +27,8 @@ namespace BookStoreWebServices
         /// <returns>List of Books.</returns>
         /// 
         [OperationContract]
-        [WebGet(UriTemplate = "")]
-        IList<Book> GetBooksByIsbn(string isbn);
+        [WebGet(UriTemplate = "/GetBooks?isbn={isbn}")]
+        List<Book> GetBooksByIsbn(string isbn);
 
         /// <summary>
         /// Gets a list of Books that match the search argument.
@@ -37,20 +37,18 @@ namespace BookStoreWebServices
         /// <returns>List of Books.</returns>
         ///  
         [OperationContract]
-        [WebGet(UriTemplate = "")]
-        IList<Book> GetBooksByTitle(string title);
+        [WebGet(UriTemplate = "/GetBooks/{title}")]
+        List<Book> GetBooksByTitle(string title);
 
         /// <summary>
-        /// Gets Ads based on arguments search,from, and to. 
+        /// Gets Ads based on argument title. 
         /// </summary>
-        /// <param name="search">String to search for ads by. If NULL, argument is ignored.</param>
-        /// <param name="from">Minimum Ad PostTimestamp. If NUll argument is ignored.</param>
-        /// <param name="to">Maximum Ad PostTimestamp. If NUll argument is ignored.</param>
-        /// <returns></returns>
+        /// <param name="title">Title to search for ads by.</param>
+        /// <returns>List of Book ads.</returns>
         /// 
         [OperationContract]
-        [WebGet(UriTemplate = "")]
-        IList<BookAd> GetAds(string title);
+        [WebGet(UriTemplate = "/GetAds?title={title}")]
+        List<BookAd> GetAds(string title);
 
         /// <summary>
         /// Posts an Ad. 
@@ -59,12 +57,10 @@ namespace BookStoreWebServices
         /// To successfully post an Ad, ad argument must contain a valid User that posted the ad, and userPassword argument must match that User's password in DB.
         /// </remarks>
         /// <param name="ad">Ad to post.</param>
-        /// <exception cref="ArgumentNullException">Thrown when ad argument is NULL.</exception>
-        /// <exception cref="ArgumentException">Thrown when ad argument is not valid, userPassword argument is not valid</exception>
-        /// <returns>True if Ad was posted.</returns>
+        /// <returns>The Book ad that was posted.</returns>
         /// 
         [OperationContract]
-        [WebInvoke(UriTemplate = "", Method = "POST")]
+        [WebInvoke(UriTemplate = "/PostAd", Method = "POST")]
         BookAd PostAd(BookAd ad);
 
         /// <summary>
@@ -73,13 +69,11 @@ namespace BookStoreWebServices
         /// <remarks>
         /// To successfully post an book, ad argument must contain a valid User that posted the ad, and userPassword argument must match that User's password in DB.
         /// </remarks>
-        /// <param name="ad">Ad to post.</param>
-        /// <exception cref="ArgumentNullException">Thrown when ad argument is NULL.</exception>
-        /// <exception cref="ArgumentException">Thrown when ad argument is not valid, userPassword argument is not valid</exception>
-        /// <returns>True if Ad was posted.</returns>
+        /// <param name="ad">Book to post.</param>
+        /// <returns>The Book that was posted.</returns>
         /// 
         [OperationContract]
-        [WebInvoke(UriTemplate = "", Method = "POST")]
+        [WebInvoke(UriTemplate = "/PostBook", Method = "POST")]
         Book PostBook(Book book);
     }
 }
